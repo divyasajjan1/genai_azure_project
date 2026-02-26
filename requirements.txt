@@ -116,7 +116,6 @@ sympy==1.14.0
 tenacity==9.1.4
 threadpoolctl==3.6.0
 tokenizers==0.22.2
---extra-index-url https://download.pytorch.org/whl/cpu
 torch==2.2.2
 tqdm==4.67.3
 transformers==4.57.6
@@ -131,6 +130,7 @@ uvloop==0.22.1
 watchfiles==1.1.1
 websocket-client==1.9.0
 websockets==15.0.1
+whitenoise==6.11.0
 xxhash==3.6.0
 yarl==1.22.0
 zipp==3.23.0
