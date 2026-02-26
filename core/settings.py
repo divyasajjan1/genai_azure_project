@@ -26,11 +26,23 @@ SECRET_KEY = 'django-insecure-i+zgd=nl-%a-m74r-tfxm%(q00*wdf@9@9@8$r16a@vk@tj+eg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'my-rag-ai-app-awd6dyaghrh3ereq.canadacentral-01.azurewebsites.net',
+    'localhost',
+    '127.0.0.1', '*'
+]
 
 CSRF_TRUSTED_ORIGINS = [
+    'https://*.azurewebsites.net',
     'https://my-rag-ai-app-awd6dyaghrh3ereq.canadacentral-01.azurewebsites.net'
 ]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
 
 # Application definition
 
