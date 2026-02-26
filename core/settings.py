@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://my-rag-ai-app-awd6dyaghrh3ereq.canadacentral-01.azurewebsites.net/'
+    'https://my-rag-ai-app-awd6dyaghrh3ereq.canadacentral-01.azurewebsites.net'
 ]
 
 # Application definition
