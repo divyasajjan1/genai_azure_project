@@ -1,0 +1,6 @@
+.env
+db.sqlite3
+chroma_db/
+venv/
+__pycache__/
+*.pyc
