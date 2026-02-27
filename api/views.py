@@ -19,19 +19,30 @@ MODEL_NAME = "gemini-2.5-flash"
 SYSTEM_PROMPT = "You are a PDF Q&A assistant. Answer ONLY using the provided context."
 
 class IngestView(APIView):
+    # Ensure you have these parsers to handle Postman's form-data
+    parser_classes = (MultiPartParser, FormParser)
+
     def post(self, request):
-        # 1. Load PDF
-        doc = fitz.open(PDF_PATH)
-        docs = [Document(page_content=page.get_text(), metadata={"page": i+1}) for i, page in enumerate(doc)]
+        # 1. Get the file from the request, NOT a hardcoded path
+        uploaded_file = request.FILES.get('file')
         
-        # 2. Chunk & Embed
+        if not uploaded_file:
+            return Response({"error": "No file uploaded"}, status=400)
+
+        # 2. Open the file directly from memory using fitz (PyMuPDF)
+        file_content = uploaded_file.read()
+        doc = fitz.open(stream=file_content, filetype="pdf")
+        # 3. Continue with your RAG logic
+        docs = [Document(page_content=page.get_text(), metadata={"page": i+1}) for i, page in enumerate(doc)]
+
+        # 4. Chunk & Embed
         splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         chunks = splitter.split_documents(docs)
         embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
         
-        # 3. Store
+        # 5. Store
         db = Chroma.from_documents(documents=chunks, embedding=embeddings, persist_directory=DB_DIR)
-        return Response({"message": f"Ingested {len(chunks)} chunks successfully."})
+        return Response({"message": f"Ingested {len(chunks)} chunks successfully from {uploaded_file.name}."})
 
 @method_decorator(csrf_exempt, name='dispatch')    
 class AskView(APIView):
