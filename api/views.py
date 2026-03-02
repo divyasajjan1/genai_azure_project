@@ -15,13 +15,13 @@ from .models import QueryLog
 
 # Create your views here.
 # Constants
-DB_DIR = "chroma_db"
+DB_DIR = "/home/site/wwwroot/chroma_db"
 # PDF_PATH = "data/sample.pdf"
 MODEL_NAME = "gemini-2.5-flash" 
 SYSTEM_PROMPT = "You are a PDF Q&A assistant. Answer ONLY using the provided context."
 
 def get_embeddings():
-    return GoogleGenerativeAIEmbeddings(model="text-embedding-004")
+    return GoogleGenerativeAIEmbeddings(model="gemini-embedding-001")
 
 class IngestView(APIView):
     # Ensure you have these parsers to handle Postman's form-data
