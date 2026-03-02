@@ -136,5 +136,5 @@ yarl==1.22.0
 zipp==3.23.0
 zstandard==0.25.0
 pysqlite3-binary
-langchain_google_genai
+langchain-google-genai>=2.0.0
 pillow
